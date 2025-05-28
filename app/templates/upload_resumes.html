@@ -1,0 +1,20 @@
+<!-- templates/upload.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Resumes</title>
+</head>
+<body>
+    <h1>Upload Bulk Resumes</h1>
+    <form action="/candidates/upload_bulk" method="post" enctype="multipart/form-data">
+        <input type="file" name="files" multiple>
+        <button type="submit">Upload</button>
+    </form>
+    <!-- {% if uploaded %} -->
+    <!-- {% else %}
+        Resumes uploaded successfully!
+
+    {% endif %} -->
+</body>
+</html>

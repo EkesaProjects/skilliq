@@ -1,0 +1,80 @@
+{
+  "candidate_name": "Niraj Gurav",
+  "email_address": "neerajgurav92@gmail.com",
+  "mobile_number": "8690919143",
+  "phone_number": null,
+  "date_of_birth": "1999-11-10",
+  "linkedin_link": "linkedin.com/in/niraj-gurav-a68ba3321",
+  "github_link": null,
+  "total_experience": null,
+  "sector": null,
+  "current_designation": null,
+  "current_employer": null,
+  "notice_period_days": null,
+  "expected_ctc": null,
+  "current_ctc": null,
+  "current_address": "B1-504 shreenand city 10, new maninagar, ramol",
+  "current_locality": null,
+  "current_city": "Ahmedabad",
+  "current_state": null,
+  "current_zip": "380026",
+  "permanent_address": null,
+  "permanent_locality": null,
+  "permanent_city": null,
+  "permanent_state": null,
+  "permanent_zip": null,
+  "skills": [
+    "Python",
+    "django",
+    "sql",
+    "html",
+    "css",
+    "Data Visualization",
+    "PowerBI",
+    "MS Excel",
+    "Tableau"
+  ],
+  "education": [
+    {
+      "degree": "B-Tech in CSE",
+      "institution": "Karnavati UNIVERSITY",
+      "start_date": "2022-07",
+      "end_date": "2025-04",
+      "cgpa": null,
+      "percentage": null
+    },
+    {
+      "degree": "Diploma",
+      "institution": "information technology",
+      "start_date": null,
+      "end_date": "2022-04",
+      "cgpa": null,
+      "percentage": null
+    },
+    {
+      "degree": null,
+      "institution": "Doon International Public school",
+      "start_date": null,
+      "end_date": "2016-04",
+      "cgpa": null,
+      "percentage": null
+    }
+  ],
+  "experience": [],
+  "projects": [
+    {
+      "title": "Hospital management system",
+      "description": "A Hospital Management System project automates patient records, appointments, billing, and inventory, enhancing hospital efficiency and organization.",
+      "github_link": null,
+      "start_date": null,
+      "end_date": null
+    },
+    {
+      "title": "Plant disease detection system",
+      "description": "Building image recognition model using python / Machine learning",
+      "github_link": null,
+      "start_date": null,
+      "end_date": null
+    }
+  ]
+}

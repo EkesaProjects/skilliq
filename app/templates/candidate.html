@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Candidates</title>
+    <style>
+        tr.clickable-row {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>All Candidates</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>candidate_id</th>
+                <th>candidate_name</th>
+                <th>email_address</th>
+                <th>mobile_number</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr class="clickable-row" onclick="window.location='/candidates/candidate/{{ record[0] }}'">
+                <td>{{ record[0] }}</td>
+                <td>{{ record[1] }}</td>
+                <td>{{ record[2] }}</td>
+                <td>{{ record[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
