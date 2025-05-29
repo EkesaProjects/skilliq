@@ -9,30 +9,31 @@ import shutil
 
 
 def extract_text_from_file(file_path):
-    print("file is", file_path)
-    if not os.path.exists(file_path):
-        print(f"File not found: {file_path}")
-        return ""
+    try:
+        print("file is", file_path)
+        if not os.path.exists(file_path):
+            print(f"File not found: {file_path}")
+            return ""
 
-    _, ext = os.path.splitext(file_path)
-    ext = ext.lower()
+        _, ext = os.path.splitext(file_path)
+        ext = ext.lower()
 
-    text = ""
+        text = ""
 
-    if ext == ".pdf":
-        doc = fitz.open(file_path)
-        for page_number in range(len(doc)):
-            page = doc[page_number]
-            text += page.get_text()
-        doc.close()
+        if ext == ".pdf":
+            doc = fitz.open(file_path)
+            for page_number in range(len(doc)):
+                page = doc[page_number]
+                text += page.get_text()
+            doc.close()
 
-    elif ext == ".docx":
-        doc = Document(file_path)
-        for para in doc.paragraphs:
-            text += para.text + "\n"
+        elif ext == ".docx":
+            doc = Document(file_path)
+            for para in doc.paragraphs:
+                text += para.text + "\n"
 
-    else:
-        print(f"Unsupported file type: {ext}")
+    except Exception as e:
+        print(f"Unsupported file type: {ext} : {e}")
         return ""
 
     return text

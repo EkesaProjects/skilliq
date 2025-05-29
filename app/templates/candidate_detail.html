@@ -4,80 +4,156 @@
 <head>
     <title>{{ candidate[0][0][0] }}</title>
     <style>
-           body { font-family: Arial, sans-serif; margin: 30px; }
+        body { font-family: Arial, sans-serif; margin: 30px; }
         .section { margin-bottom: 30px; }
         .name { font-size: 24px; font-weight: bold; }
         .contact { font-size: 16px; margin-bottom: 10px; }
         ul { list-style-type: square; margin-left: 20px; }
         .edu-entry, .job-entry { margin-bottom: 10px; }
         .date { font-style: italic; color: #555; }
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
     </style>
 </head>
 
 <body>
 
-    {% for info in candidate[0] %}
-    <div class="header">
-        <div class="name">{{ info[0] }}</div>
-        <div class="contact">
-            Email: {{ info[1] }}<br>
-            Phone: {{ info[2] }}<br>
-            Designation: {{ info[3] }}<br>
-            Current employer: {{ info[4] }}<br>
-            Notice period: {{ info[5] }}<br>
-            Expected ctc: {{ info[6] }}<br>
-            Current city: {{ info[7] }}<br>
-           
-        </div>
+{% for info in candidate[0] %}
+<div class="header">
+    <div class="name">{{ info[0] if info[0] and info[0]|lower != 'none' else '' }}</div>
+    <div class="contact">
+        Email: {{ info[1] if info[1] and info[1]|lower != 'none' else '' }}<br>
+        Phone: {{ info[2] if info[2] and info[2]|lower != 'none' else '' }}<br>
+        Designation: {{ info[3] if info[3] and info[3]|lower != 'none' else '' }}<br>
+        Current employer: {{ info[4] if info[4] and info[4]|lower != 'none' else '' }}<br>
+        Notice period: {{ info[5] if info[5] and info[5]|lower != 'none' else '' }}<br>
+        Expected ctc: {{ info[6] if info[6] and info[6]|lower != 'none' else '' }}<br>
+        Current city: {{ info[7] if info[7] and info[7]|lower != 'none' else '' }}<br>
+        Professional summary: {{ info[8] if info[8] and info[8]|lower != 'none' else '' }}<br>
+        Total Experience: {{ info[9] | default('') }} years<br>
+        Sector: {{ info[10] | default('') }}<br>
     </div>
-    {% endfor %}
+</div>
+{% endfor %}
 
+<div class="skills">
+    <h2>Skills</h2>
+    <table id="skillsTable" border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th>Skill</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for skill in candidate[1] %}
+            <tr>
+                <td>{{ skill[0] if skill[0] and skill[0]|lower != 'none' else '' }}</td>
+                <td>{{ skill[1] if skill[1] and skill[1]|lower != 'none' else '' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
-    <div class="skills">
-        <h2>Skills</h2>
-        <ul>
-        {% for skill in candidate[1] %}
-            <li>{{ skill[0] }}</li>
-        {% endfor %}
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>Education</h2>
-        {% for edu in candidate[2] %}
-            <div class="edu-entry">
-                <strong>{{ edu[0] }}</strong> - {{ edu[1] }}<br>
-                <span class="date">{{ edu[2] }} to {{ edu[3] }}</span>
-            </div>
-        {% endfor %}
-    </div>
-
-     <div class="section">
-        <h2>Work Experience</h2>
-        {% for job in candidate[3] %}
-
-            <div class="job-entry">
-                <strong>{{ job[0] }}</strong><br>
-                <span class="date">{{ job[1] }} to {{ job[2] if job[2] else 'Present' }}</span>
-                <span class="date">{{job[3]}}</span>
-                <span class="date">{{job[4]}}</span>
-                <span class="date">{{job[5]}}</span>
-                <span class="date">{{job[6]}}</span>
-
-            </div>
-        {% endfor %}
-    </div>
-
-    <div class="section">
-    <h2>Projects</h2>
-    {% for project in candidate[4] %}
-        <div class="project-entry">
-            <strong>{{ project[0] }}</strong><br>
-            <p style="white-space: pre-line;">{{ project[1] }}</p>
+<div class="section">
+    <h2>Education</h2>
+    {% for edu in candidate[2] %}
+        <div class="edu-entry">
+            <strong>{{ edu[0] if edu[0] and edu[0]|lower != 'none' else '' }}</strong> - 
+            {{ edu[1] if edu[1] and edu[1]|lower != 'none' else '' }}<br>
+            <span class="date">{{ edu[2] if edu[2] and edu[2]|lower != 'none' else '' }} 
+                to {{ edu[3] if edu[3] and edu[3]|lower != 'none' else '' }}</span>
         </div>
     {% endfor %}
 </div>
 
-</body>
+<div class="section">
+    <h2>Work Experience</h2>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in candidate[3] %}
+            <tr>
+                <td>{{ job[0] if job[0] and job[0]|lower != 'none' else '' }}</td>
+                <td>{{ job[1] if job[1] and job[1]|lower != 'none' else '' }}</td>
+                <td>{{ job[2] if job[2] and job[2]|lower != 'none' else 'Present' }}</td>
+                <td>{{ job[3] if job[3] and job[3]|lower != 'none' else '' }}</td>
+                <td style="white-space: pre-line;">{{ job[4] if job[4] and job[4]|lower != 'none' else '' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
+<div class="section projects">
+    <h2>Projects</h2>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th>Project Title</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in candidate[4] %}
+            <tr>
+                <td>{{ project[0] if project[0] and project[0]|lower != 'none' else '' }}</td>
+                <td style="white-space: pre-line;">{{ project[1] if project[1] and project[1]|lower != 'none' else '' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const skillTable = document.getElementById('skillsTable');
+        const contentSections = document.querySelectorAll('.section, .contact, .projects');
+        const primarySkills = [];
+
+        // Collect primary skills from table
+        for (let i = 1; i < skillTable.rows.length; i++) {
+            const skill = skillTable.rows[i].cells[0].innerText.trim();
+            const category = skillTable.rows[i].cells[1].innerText.trim().toLowerCase();
+            if (category === 'primary') {
+                primarySkills.push(skill);
+            }
+        }
+
+        function highlightText(container, skill) {
+            const regex = new RegExp(`\\b(${skill})\\b`, 'gi');
+            const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+            let node;
+
+            while ((node = walker.nextNode())) {
+                const parent = node.parentNode;
+                if (!parent || ['SCRIPT', 'STYLE'].includes(parent.nodeName)) continue;
+
+                if (regex.test(node.nodeValue)) {
+                    const span = document.createElement('span');
+                    span.innerHTML = node.nodeValue.replace(regex, '<span class="highlight">$1</span>');
+                    parent.replaceChild(span, node);
+                }
+            }
+        }
+
+        // Apply highlight for each primary skill in the scoped content
+        primarySkills.forEach(skill => {
+            contentSections.forEach(section => highlightText(section, skill));
+        });
+    });
+</script>
+
+</body>
 </html>

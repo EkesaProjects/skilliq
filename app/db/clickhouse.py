@@ -89,7 +89,8 @@ def insert_skill_list_data(table: str, data: list[dict]):
             for skill in skills:
                 print(get_id('skill_id', 'skills'))
                 entry = {
-                    'skill': skill,
+                    'skill': skill['skill'],
+                    'category': skill['category'],
                     'candidate_id': row.get('candidate_id'),
                     'skill_id': current_skill_id
                 }
@@ -158,7 +159,9 @@ def insert_experience_list_data(table: str, data: list[dict]):
         for row in data:
             candidate_id = row.get('candidate_id')
             experiences = row.get('title', [])  # this is the correct key
-
+            # expirence - description
+            # candidate - professional_summary
+            # candidate - file_path
             for exp_entry in experiences:
                 entry = {
                     'experience_id': current_experience_id,

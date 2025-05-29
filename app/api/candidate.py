@@ -75,14 +75,17 @@ async def upload_bulk(request: Request, files: List[UploadFile] = File(...)):
             extracted_resume_text = extract_text_from_file(filepath)
             json_payload = parse_resume(extracted_resume_text)
 
-            candidate_data = json.loads(json_payload)
-            # print("+++++++++++++++++++++++++++", candidate_data)
+            # candidate_data = json.loads(json_payload)
+            candidate_data = json_payload
+            # candidate_data = json.loads(candidate_data)
+
+            print("+++++++++++++++++++++++++++", candidate_data.get('Skills', []))
 
             candidate_dao = CandidateDAO()
             candidate_id = candidate_dao.get_id('candidate_id', 'candidate')
             # print("this is cnadidatre id ______________________",candidate_id)
-            candidate_dao.insert_candidate_data(candidate_id, candidate_data)
-            candidate_dao.insert_skills(candidate_id, candidate_data.get('skills', []))
+            candidate_dao.insert_candidate_data(candidate_id, candidate_data, filepath)
+            candidate_dao.insert_skills(candidate_id, candidate_data.get('Skills', []))
             candidate_dao.insert_education(candidate_id, candidate_data.get('education', []))
             candidate_dao.insert_experience(candidate_id, candidate_data.get('experience', []))
             candidate_dao.insert_projects(candidate_id, candidate_data.get('projects', []))

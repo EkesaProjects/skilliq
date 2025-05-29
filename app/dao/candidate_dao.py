@@ -31,17 +31,24 @@ class CandidateDAO():
                 c.current_employer,
                 c.notice_period_days,
                 c.expected_ctc,
-                c.current_city
+                c.current_city,
+                c.professional_summary,
+                ROUND(CAST(c.total_experience AS DECIMAL(16,1)), 1) AS total_experience,
+                c.sector
                 from candidate c
                 where c.candidate_id = {candidate_id}
+                order by c.candidate_id
             """),
 
             'skills_query' : ( f"""
             select  
-                s.skill
+                s.skill,
+                s.category
                 from skills s
-                where s.candidate_id = {candidate_id} """),
-            
+                where s.candidate_id = {candidate_id}
+                order by s.category
+             """),
+                
             'education_query' : (f"""
                 select  
             e.degree,
@@ -56,6 +63,7 @@ class CandidateDAO():
                 select 
             ex.company,
             ex.title,
+            ex.description,
             ex.start_date,
             ex.end_date
             from experience ex
@@ -76,7 +84,7 @@ class CandidateDAO():
         result = []
         for table_qry in view_queries.values():
             result.append(execute_query(table_qry))
-
+        print('query fetched result are |||||||||||||||||||||dsfgggggggggggggggggg', result)
         # for table in TABLES:
         #     result.append(execute_query(f'{table}_query'))
         # print('result from join query &&&&&&&&&&&&&&&&&&&&', result)
@@ -84,7 +92,7 @@ class CandidateDAO():
         # return group_candidate_data(result)
         return result
 
-    def insert_candidate_data(self, candidate_id, candidate):
+    def insert_candidate_data(self, candidate_id, candidate, filepath):
         print('Inserting candidate')
         # sql = "INSERT INTO candidate (id, name, email, phone) VALUES"
 
@@ -106,7 +114,8 @@ class CandidateDAO():
             'created_date': now,
             'created_by': 1,
             'updated_date': now,
-            'updated_by': 1
+            'updated_by': 1,
+            'file_path': filepath
         }
         columns = get_table_columns('candidate')
         print("qqqqqqqqqqqqqqqqqqqqqq", candidate, type(columns))
